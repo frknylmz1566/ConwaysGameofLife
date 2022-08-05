@@ -1,21 +1,33 @@
 import java.util.ArrayList;
+import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Main {
 
     public static int[][] board;
     public static int[][] next;
+    public static int i=0;
     public static void main(String[] args) {
+
+
         gameBoard(15,15);
-        System.out.println();
-        liveOrDead(15,15);
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
 
+                System.out.println();
+                liveOrDead(15,15);
+                i++;
 
-
+                if(i==15) timer.cancel();
+            }
+        } , 0, 1000);
 
     }
 
     static void liveOrDead(int row,int cell){
-
         next= new int[row][cell];
         for (int l = 0; l < row; l++){
             for (int m = 0; m < cell; m++){
@@ -29,20 +41,13 @@ public class Main {
                     }
                 }
 
-
-
                 alive -= board[l][m];
-
                 if ((board[l][m] == 1) && (alive < 2))
                     next[l][m] = 0;
-
                 else if ((board[l][m] == 1) && (alive > 3))
                     next[l][m] = 0;
-
-
                 else if ((board[l][m] == 0) && (alive == 3))
                     next[l][m] = 1;
-
                 else
                     next[l][m] = board[l][m];
             }
@@ -56,37 +61,32 @@ public class Main {
                 if (next[i][j] == 0)
                     System.out.print("."+"\t");
                 else
-                    System.out.print("1"+"\t");
+                    System.out.print("*"+"\t");
             }
             System.out.println();
         }
-
-
-
+        System.arraycopy(next,0,board,0,row);
 
 
     }
      static void gameBoard(int row,int cell){
 
         board= new int[row][cell];
-        board[5][4]=1;
-        board[5][5]=1;
-        board[5][6]=1;
-        board[5][7]=1;
+
 
         for(int i=0;i< board.length ;i++) {
             System.out.println();
             for (int j = 0; j < board.length; j++) {
-                //System.out.print("."+"\t");
+                Random rd= new Random();
+                int random = rd.nextInt(0,2);
+                board[i][j]=random;
                 if (board[i][j] == 0)
                     System.out.print("." + "\t");
                 else
-                    System.out.print("1" + "\t");
+                    System.out.print("*" + "\t");
                  }
         }
 
     }
-
-
 
 }
