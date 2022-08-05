@@ -30,6 +30,7 @@ public class Main {
                 }
 
 
+
                 alive -= board[l][m];
 
                 if ((board[l][m] == 1) && (alive < 2))
