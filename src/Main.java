@@ -7,7 +7,7 @@ public class Main {
 
     public static int[][] board;
     public static int[][] next;
-    public static int i=0;
+    public static int iteration=0;
     public static void main(String[] args) {
 
 
@@ -18,10 +18,11 @@ public class Main {
             public void run() {
 
                 System.out.println();
-                liveOrDead(15,15);
-                i++;
 
-                if(i==15) timer.cancel();
+                liveOrDead(15,15);
+                iteration++;
+
+                if(iteration==15) timer.cancel();
             }
         } , 0, 1000);
 
@@ -72,8 +73,6 @@ public class Main {
      static void gameBoard(int row,int cell){
 
         board= new int[row][cell];
-
-
         for(int i=0;i< board.length ;i++) {
             System.out.println();
             for (int j = 0; j < board.length; j++) {
