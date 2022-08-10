@@ -54,7 +54,6 @@ public class Main {
             }
         }
 
-
         System.out.println("Next Generation");
         for (int i = 0; i < row; i++)
         {
